@@ -1,4 +1,5 @@
-[![npm](https://img.shields.io/npm/v/@hashgraph/hardhat-hethers.svg)](https://www.npmjs.com/package/hardhat-hethers) [![hardhat](https://hardhat.org/buidler-plugin-badge.svg?1)](https://hardhat.org)
+[![npm](https://img.shields.io/npm/v/@hashgraph/hardhat-hethers.svg)](https://www.npmjs.com/package/hardhat-hethers) [![hardhat](https://hardhat.org/buidler-plugin-badge.svg?1)](https://hardhat.org)[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 
 # @hashgraph/hardhat-hethers
 
@@ -241,3 +242,20 @@ To create a contract factory, all libraries must be linked. An error will be thr
 Hethers.js polls the network to check if some event was emitted (except when a `WebSocketProvider` is used; see below). This polling is done every 4 seconds. If you have a script or test that is not emitting an event, it's likely that the execution is finishing before the event is detected by the polling mechanism.
 
 If you are connecting to a Hardhat node using a `WebSocketProvider`, events should be emitted immediately. But keep in mind that you'll have to create this provider manually, since Hardhat only supports configuring networks via http. That is, you can't add a `localhost` network with a URL like `ws://localhost:8545`.
+
+## Contributing
+
+Contributions are welcome. Please see the
+[contributing guide](https://github.com/hashgraph/.github/blob/main/CONTRIBUTING.md)
+to see how you can get involved.
+
+## Code of Conduct
+
+This project is governed by the
+[Contributor Covenant Code of Conduct](https://github.com/hashgraph/.github/blob/main/CODE_OF_CONDUCT.md). By
+participating, you are expected to uphold this code of conduct. Please report unacceptable behavior
+to [oss@hedera.com](mailto:oss@hedera.com).
+
+## License
+
+[Apache License 2.0](LICENSE)
