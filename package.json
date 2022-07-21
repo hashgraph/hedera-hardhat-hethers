@@ -37,6 +37,7 @@
     "README.md"
   ],
   "devDependencies": {
+    "@hashgraph/hedera-local": "^1.1.0",
     "@hashgraph/hethers": "^1.1.0",
     "@types/chai": "^4.2.0",
     "@types/mocha": "^9.0.0",
