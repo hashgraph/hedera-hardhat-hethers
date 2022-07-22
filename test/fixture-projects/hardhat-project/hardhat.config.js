@@ -9,6 +9,7 @@ module.exports = {
     gasLimit: 300000,
     networks: {
       testnet: {
+        chainId: 296,
         accounts: [
           {
             "account": process.env['TESTNET_ACCOUNT_ID_1'],
@@ -21,6 +22,7 @@ module.exports = {
         ]
       },
       previewnet: {
+        chainId: 297,
         accounts: [
           {
             "account": process.env['PREVIEWNET_ACCOUNT_ID_1'],
@@ -33,6 +35,7 @@ module.exports = {
         ]
       },
       local: {
+        chainId: 298,
         accounts: [
           {
             "account": '0.0.1002',
@@ -42,15 +45,7 @@ module.exports = {
             "account": '0.0.1003',
             "privateKey": '0x6ec1f2e7d126a74a1d2ff9e1c5d90b92378c725e506651ff8bb8616a5c724628'
           }
-        ],
-        // consensusNodes: [
-        //   {
-        //     url: '127.0.0.1:50211',
-        //     nodeId: '0.0.3'
-        //   }
-        // ],
-        // mirrorNodeUrl: 'http://127.0.0.1:5551',
-        // chainId: 298,
+        ]
       }
     }
   },
