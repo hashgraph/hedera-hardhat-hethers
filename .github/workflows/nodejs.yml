@@ -24,6 +24,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Install Docker
+        uses: ndeloof/install-docker-compose
+        with:
+          version: v1.28.6
+          legacy: true
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
