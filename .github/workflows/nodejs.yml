@@ -36,6 +36,9 @@ jobs:
       - name: Build TypeScript
         run: npm run build
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
       - name: Start the local node
         run: npx hedera-local start
 
