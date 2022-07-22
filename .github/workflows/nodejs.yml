@@ -4,6 +4,8 @@ on:
   push:
     branches: [main, develop]
   pull_request:
+  workflow_dispatch:
+
 
 jobs:
 
@@ -11,7 +13,7 @@ jobs:
 
     name: Tests
 
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, hardhat, hethers, standard, ephemeral]
 
     strategy:
       fail-fast: false
@@ -19,13 +21,14 @@ jobs:
         node-version: [ 16.x ]
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: Checkout repository
-        uses: actions/checkout@v2
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
