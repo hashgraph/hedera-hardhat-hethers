@@ -35,7 +35,8 @@ export class HethersProviderWrapper extends hethers.providers.BaseProvider {
 
         super({
             network: networkConfig,
-            mirrorNodeUrl: hardhatProvider.getHederaClient().mirrorNetwork[0]
+            // @ts-ignore
+            mirrorNodeUrl: hardhatProvider._mirrorNodeUrl
         });
         this._network.chainId = hardhatProvider._network.chainId;
 

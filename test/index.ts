@@ -33,25 +33,21 @@ dotenv.config({path: path.resolve(__dirname, '../.env')});
 
 const test_on = process.env['RUN_TEST_ON'];
 // @ts-ignore
-const test_on_lowercase = test_on.toLowerCase();
+const activeNetwork = test_on.toLowerCase();
 
 describe("Hethers plugin", function() {
-  useEnvironment("hardhat-project", test_on_lowercase);
+  useEnvironment("hardhat-project", activeNetwork);
   let wallet1: hethers.Wallet, wallet2: hethers.Wallet;
 
-  before(function() {
+  beforeEach(function() {
     wallet1 = new hethersObj.Wallet({
-      // @ts-ignore
-      "account": process.env[`${test_on}_ACCOUNT_ID_1`],
-      // @ts-ignore
-      "privateKey": process.env[`${test_on}_PRIVATEKEY_1`]
+      "account": this.env.config.networks[activeNetwork].accounts[0].account,
+      "privateKey": this.env.config.networks[activeNetwork].accounts[0].privateKey
     });
 
     wallet2 = new hethersObj.Wallet({
-      // @ts-ignore
-      "account": process.env[`${test_on}_ACCOUNT_ID_2`],
-      // @ts-ignore
-      "privateKey": process.env[`${test_on}_PRIVATEKEY_2`]
+      "account": this.env.config.networks[activeNetwork].accounts[1].account,
+      "privateKey": this.env.config.networks[activeNetwork].accounts[1].privateKey
     });
   });
   this.timeout(900000);
@@ -213,12 +209,12 @@ describe("Hethers plugin", function() {
         assert.equal(receipt.status, 1);
       });
 
-      xit("should get the chainId", async function() {
+      it("should get the chainId", async function() {
         const [sig] = await this.env.hethers.getSigners();
 
         const chainId = await sig.getChainId();
 
-        assert.equal(chainId, 291);
+        assert.equal(chainId, this.env.config.networks[activeNetwork].chainId);
       });
 
       it("should check and populate a transaction", async function() {

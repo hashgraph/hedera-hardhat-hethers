@@ -29,22 +29,23 @@ dotenv.config({path: path.resolve(__dirname, '../.env')});
 
 const test_on = process.env['RUN_TEST_ON'];
 // @ts-ignore
-const test_on_lowercase = test_on.toLowerCase();
+const activeNetwork = test_on.toLowerCase();
 
 
 describe('Hethers provider wrapper', function () {
     let realProvider: hethers.providers.BaseProvider;
     let wrapperProvider: HethersProviderWrapper;
 
-    useEnvironment('hardhat-project', test_on_lowercase);
+    useEnvironment('hardhat-project', activeNetwork);
 
     beforeEach(function () {
-        realProvider = new hethers.providers.BaseProvider(test_on_lowercase);
+        realProvider = new hethers.providers.BaseProvider(activeNetwork);
         wrapperProvider = new HethersProviderWrapper(this.env.network.provider);
     });
 
     it('Should return the same as the real provider', async function () {
-        const accountId = process.env[`${test_on}_ACCOUNT_ID_2`];
+        const accountId = this.env?.config?.networks[activeNetwork]?.accounts[1]?.account;
+
         // @ts-ignore
         const realProviderResponse = (await realProvider.getBalance(accountId)).toString();
         // @ts-ignore
