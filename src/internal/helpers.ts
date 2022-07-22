@@ -37,7 +37,7 @@ function isArtifact(artifact: any): artifact is Artifact {
 
 export function getInitialHederaProvider(hre: HederaHardhatRuntimeEnvironment): hethers.providers.BaseProvider {
     const networkName = hre.hardhatArguments.network || hre.config.defaultNetwork;
-    if (['mainnet', 'testnet', 'previewnet'].indexOf(networkName.toLocaleLowerCase()) > -1) {
+    if (['mainnet', 'testnet', 'previewnet', 'local'].indexOf(networkName.toLocaleLowerCase()) > -1) {
         return hethers.getDefaultProvider(networkName);
     }
 
