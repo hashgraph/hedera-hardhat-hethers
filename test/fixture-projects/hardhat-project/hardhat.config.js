@@ -9,7 +9,7 @@ module.exports = {
     gasLimit: 300000,
     networks: {
       testnet: {
-        chainId: 296,
+        chainId: 291,
         accounts: [
           {
             "account": process.env['TESTNET_ACCOUNT_ID_1'],
@@ -22,7 +22,7 @@ module.exports = {
         ]
       },
       previewnet: {
-        chainId: 297,
+        chainId: 292,
         accounts: [
           {
             "account": process.env['PREVIEWNET_ACCOUNT_ID_1'],
