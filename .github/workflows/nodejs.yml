@@ -41,8 +41,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Create .env file
+        run: cp ./packages/server/tests/localAcceptance.env .env
+
       - name: Build TypeScript
         run: npm run build
 
+      - name: Start the local node
+        run: npx hedera-local start
+
       - name: Run tests
-        run: TESTNET_ACCOUNT_ID_1=$testnet_account_id_1 TESTNET_PRIVATEKEY_1=$testnet_privatekey_1 TESTNET_ACCOUNT_ID_2=$testnet_account_id_2 TESTNET_PRIVATEKEY_2=$testnet_privatekey_2 PREVIEWNET_ACCOUNT_ID_1=$previewnet_account_id_1 PREVIEWNET_PRIVATEKEY_1=$previewnet_privatekey_1 PREVIEWNET_ACCOUNT_ID_2=$previewnet_account_id_2 PREVIEWNET_PRIVATEKEY_2=$previewnet_privatekey_2 RUN_TEST_ON=$run_test_on npm run test
+        run: TESTNET_ACCOUNT_ID_1=$testnet_account_id_1 TESTNET_PRIVATEKEY_1=$testnet_privatekey_1 TESTNET_ACCOUNT_ID_2=$testnet_account_id_2 TESTNET_PRIVATEKEY_2=$testnet_privatekey_2 PREVIEWNET_ACCOUNT_ID_1=$previewnet_account_id_1 PREVIEWNET_PRIVATEKEY_1=$previewnet_privatekey_1 PREVIEWNET_ACCOUNT_ID_2=$previewnet_account_id_2 PREVIEWNET_PRIVATEKEY_2=$previewnet_privatekey_2 npm run test
+
+      - name: Stop the local node
+        run: npx hedera-local stop
