@@ -1,4 +1,4 @@
-[![npm](https://img.shields.io/npm/v/@hashgraph/hardhat-hethers.svg)](https://www.npmjs.com/package/hardhat-hethers) [![hardhat](https://hardhat.org/buidler-plugin-badge.svg?1)](https://hardhat.org)[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![npm](https://img.shields.io/npm/v/@hashgraph/hardhat-hethers.svg)](https://www.npmjs.com/package/@hashgraph/hardhat-hethers) [![hardhat](https://hardhat.org/buidler-plugin-badge.svg?1)](https://hardhat.org)[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
 # @hashgraph/hardhat-hethers
