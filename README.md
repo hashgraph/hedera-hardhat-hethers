@@ -84,7 +84,7 @@ This plugin creates no additional tasks.
 
 ## Environment extensions
 
-This plugins adds an `hethers` object to the Hardhat Runtime Environment.
+This plugin adds a `hethers` object to the Hardhat Runtime Environment.
 
 This object has the [same API](https://docs.hedera.com/hethers/) as `hethers.js`, with some extra Hardhat-specific functionality.
 
@@ -209,7 +209,7 @@ require("@hashgraph/hardhat-hethers");
 // task action function receives the Hardhat Runtime Environment as second argument
 task('getBalance', 'Prints the the balance of "0.0.29631749"', async (_, {hethers}) => {
     const balance = (await hethers.provider.getBalance('0.0.29631749')).toString();
-  c onsole.log(`Balance of "0.0.29631749": ${balance} tinybars`);
+    console.log(`Balance of "0.0.29631749": ${balance} tinybars`);
 });
 
 module.exports = {};
