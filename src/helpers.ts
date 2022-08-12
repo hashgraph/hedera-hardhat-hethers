@@ -19,9 +19,9 @@
  */
 
 import {NomicLabsHardhatPluginError} from "hardhat/plugins";
-import {Artifact, HardhatRuntimeEnvironment,} from "hardhat/types";
+import {Artifact, HardhatRuntimeEnvironment} from "hardhat/types";
 import type {SignerWithAddress} from "./signers";
-import {HederaHardhatRuntimeEnvironment, HederaNodeConfig} from "./type-extensions";
+import {HederaNodeConfig} from "./type-extensions";
 import type {FactoryOptions, Libraries} from "./type-extensions";
 import {hethers} from "@hashgraph/hethers";
 
@@ -55,12 +55,13 @@ function isArtifact(artifact: any): artifact is Artifact {
     );
 }
 
-export function getInitialHederaProvider(hre: HederaHardhatRuntimeEnvironment): hethers.providers.BaseProvider {
+export function getInitialHederaProvider(hre: HardhatRuntimeEnvironment): hethers.providers.BaseProvider {
     const networkName = hre.hardhatArguments.network || hre.config.defaultNetwork;
     if (['mainnet', 'testnet', 'previewnet', 'local'].indexOf(networkName.toLocaleLowerCase()) > -1) {
         return hethers.getDefaultProvider(networkName);
     }
 
+    // @ts-ignore
     const {consensusNodes, mirrorNodeUrl, chainId} = hre.config.networks[networkName];
     if (consensusNodes?.length && mirrorNodeUrl && chainId != undefined && consensusNodes.length) {
         let cnNetworkConfig: { [url: string]: string } = {};
@@ -108,20 +109,20 @@ export async function getSigner(
 
 
 export function getContractFactory(
-    hre: HederaHardhatRuntimeEnvironment,
+    hre: HardhatRuntimeEnvironment,
     name: string,
     signerOrOptions?: hethers.Signer | FactoryOptions
 ): Promise<hethers.ContractFactory>;
 
 export function getContractFactory(
-    hre: HederaHardhatRuntimeEnvironment,
+    hre: HardhatRuntimeEnvironment,
     abi: any[],
     bytecode: hethers.utils.BytesLike,
     signer?: hethers.Signer
 ): Promise<hethers.ContractFactory>;
 
 export async function getContractFactory(
-    hre: HederaHardhatRuntimeEnvironment,
+    hre: HardhatRuntimeEnvironment,
     nameOrAbi: string | any[],
     bytecodeOrFactoryOptions?:
         | (hethers.Signer | FactoryOptions)
@@ -159,7 +160,7 @@ function isFactoryOptions(
 }
 
 export async function getContractFactoryFromArtifact(
-    hre: HederaHardhatRuntimeEnvironment,
+    hre: HardhatRuntimeEnvironment,
     artifact: Artifact,
     signerOrOptions?: hethers.Signer | FactoryOptions
 ) {
@@ -334,7 +335,7 @@ function defaultNthArgument(fn, n, thisObj, defaultObj) {
 }
 
 async function getContractFactoryByAbiAndBytecode(
-    hre: HederaHardhatRuntimeEnvironment,
+    hre: HardhatRuntimeEnvironment,
     abi: any[],
     bytecode: hethers.utils.BytesLike,
     signer?: hethers.Signer
@@ -342,7 +343,7 @@ async function getContractFactoryByAbiAndBytecode(
     const {ContractFactory} = require("@hashgraph/hethers") as typeof hethers;
 
     if (signer === undefined) {
-        const signers = await hre.hethers?.getSigners(hre);
+        const signers = await getSigners(hre);
         if (signers && signers.length) {
             // @ts-ignore
             signer = signers[0];
@@ -374,7 +375,7 @@ async function getContractFactoryByAbiAndBytecode(
 }
 
 export async function getContractAt(
-    hre: HederaHardhatRuntimeEnvironment,
+    hre: HardhatRuntimeEnvironment,
     nameOrAbi: string | any[],
     address: string,
     signer?: hethers.Signer
@@ -388,7 +389,7 @@ export async function getContractAt(
     const {Contract} = require("@hashgraph/hethers") as typeof hethers;
 
     if (signer === undefined) {
-        const signers = await hre.hethers?.getSigners(hre);
+        const signers = await getSigners(hre);
         if (signers && signers.length) {
             // @ts-ignore
             signer = signers[0];
@@ -406,7 +407,7 @@ export async function getContractAt(
 }
 
 export async function getContractAtFromArtifact(
-    hre: HederaHardhatRuntimeEnvironment,
+    hre: HardhatRuntimeEnvironment,
     artifact: Artifact,
     address: string,
     signer?: hethers.Signer
@@ -438,7 +439,7 @@ export async function getContractAtFromArtifact(
 // This helper adds a `gas` field to the ABI function elements if the network
 // is set up to use a fixed amount of gas.
 function addGasToAbiMethodsIfNecessary(
-    hre: HederaHardhatRuntimeEnvironment,
+    hre: HardhatRuntimeEnvironment,
     abi: any[]
 ): any[] {
     const networkConfig = hre.network.config

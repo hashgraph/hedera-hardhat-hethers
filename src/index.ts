@@ -30,15 +30,17 @@ import {
     getContractFactory,
     getContractFactoryFromArtifact,
 } from "./helpers";
-import {HederaHardhatConfig, HederaHardhatRuntimeEnvironment} from "./type-extensions";
+import "./type-extensions";
 
 extendConfig(
-    (config: HederaHardhatConfig) => {
-        config.networks = {...config.networks, ...config.hedera!.networks};
+    (config, userConfig) => {
+        // @ts-ignore
+        config.networks = {...config.networks, ...userConfig.hedera.networks};
     }
 );
 
-extendEnvironment((hre: HederaHardhatRuntimeEnvironment) => {
+extendEnvironment((hre) => {
+    // @ts-ignore
     hre.network.provider = getInitialHederaProvider(hre);
 
     // @ts-ignore

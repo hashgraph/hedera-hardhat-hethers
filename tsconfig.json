@@ -1,22 +1,25 @@
 {
-  "extends": "./tsconfig-common.json",
   "compilerOptions": {
-    "outDir": "./build-test",
+    "target": "ES2017",
+    "module": "commonjs",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "strict": true,
+    "useUnknownInCatchVariables": false,
     "rootDirs": [
-      "./test"
+      "./src"
     ],
-    "composite": true
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "lib": ["es2020"],
   },
-  "include": [
-    "./test/**/*.ts"
-  ],
   "exclude": [
-    "./node_modules",
-    "./test/**/hardhat.config.ts"
+    "dist",
+    "node_modules"
   ],
-  "references": [
-    {
-      "path": "./src"
-    }
+  "include": [
+    "./src"
   ]
 }

@@ -21,7 +21,7 @@
 import 'mocha';
 import path from 'path';
 import {resetHardhatContext} from 'hardhat/plugins-testing';
-import '../src/internal/type-extensions';
+import '../src/type-extensions';
 
 export function useEnvironment(
     fixtureProjectName: string,

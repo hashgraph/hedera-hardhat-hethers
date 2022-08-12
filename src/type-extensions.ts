@@ -19,8 +19,6 @@
  */
 
 import type {hethers} from "@hashgraph/hethers";
-import {HardhatConfig} from "hardhat/types/config";
-import {HardhatRuntimeEnvironment, Network} from "hardhat/types/runtime";
 import {SignerWithAddress} from "./signers";
 import {Artifact} from "hardhat/types";
 
@@ -56,7 +54,7 @@ export interface HederaNodeConfig {
 }
 
 export interface HederaNetwork {
-    accounts?: Array<HederaAccount>;
+    accounts: Array<HederaAccount>;
     nodeId?: string;
     consensusNodes?: Array<HederaNodeConfig>;
     mirrorNodeUrl?: string;
@@ -72,26 +70,16 @@ export interface HederaConfig {
     networks: HederaNetworks;
 }
 
-export interface HederaHardhatConfig extends HardhatConfig {
-    hedera?: HederaConfig;
-    networks: any;
-}
-
-interface HederaNetworkInterface extends Network {
-    provider: any;
-}
-
 type HethersT = typeof hethers;
 
 interface HethersTExtended extends HethersT {
     provider: any,
 
-    getSigners(hre: HederaHardhatRuntimeEnvironment): Promise<SignerWithAddress[]>;
+    getSigners(): Promise<SignerWithAddress[]>;
 
-    getSigner(hre: HederaHardhatRuntimeEnvironment, identifier: any): Promise<SignerWithAddress>;
+    getSigner(identifier: any): Promise<SignerWithAddress>;
 
     getContractFactory(
-        hre: HederaHardhatRuntimeEnvironment,
         nameOrAbi: string | any[],
         bytecodeOrFactoryOptions?:
             | (hethers.Signer | FactoryOptions)
@@ -100,28 +88,39 @@ interface HethersTExtended extends HethersT {
     ): Promise<hethers.ContractFactory>;
 
     getContractFactoryFromArtifact(
-        hre: HardhatRuntimeEnvironment,
         artifact: Artifact,
         signerOrOptions?: hethers.Signer | FactoryOptions
     ): Promise<hethers.ContractFactory>;
 
     getContractAt(
-        hre: HederaHardhatRuntimeEnvironment,
         nameOrAbi: string | any[],
         address: string,
         signer?: hethers.Signer
     ): Promise<hethers.ContractFactory>;
 
     getContractAtFromArtifact(
-        hre: HederaHardhatRuntimeEnvironment,
         artifact: Artifact,
         address: string,
         signer?: hethers.Signer
     ): Promise<hethers.ContractFactory>;
 }
 
-export interface HederaHardhatRuntimeEnvironment extends HardhatRuntimeEnvironment {
-    hethers?: HethersTExtended;
-    config: HederaHardhatConfig;
-    network: HederaNetworkInterface;
+declare module "hardhat/types/runtime" {
+    export interface HardhatRuntimeEnvironment {
+        hethers: HethersTExtended;
+    }
+}
+
+declare module "hardhat/types/config" {
+    export interface HardhatUserConfig {
+        hedera: HederaConfig;
+    }
+
+    export interface HardhatConfig {
+        hedera: HederaConfig;
+
+        // We need to change the type of `networks`, but TS does not allow overriding of existing properties
+        // @ts-ignore
+        networks: HederaNetworks;
+    }
 }
