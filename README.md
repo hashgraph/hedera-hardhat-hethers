@@ -21,7 +21,17 @@ And add the following statement to your `hardhat.config.js`:
 require("@hashgraph/hardhat-hethers");
 ```
 
-Add network configuration in `hardhat.config.js`:
+Or if you're using `Typescript`:
+
+```typescript
+import "@hashgraph/hardhat-hethers";
+```
+
+## Configuration
+
+This plugin extends the `HardhatConfig` object with `hedera` and updates the type of the `networks` field.
+
+Here is an example network configuration in `hardhat.config.js`:
 
 ```js
 module.exports = {
@@ -61,11 +71,11 @@ module.exports = {
         chainId: 0,
         accounts: [
           {
-            'account': '0.0.1002',
+            'account': '0.0.1001',
             'privateKey': '0x7f109a9e3b0d8ecfba9cc23a3614433ce0fa7ddcc80f2a8f10b222179a5a80d6'
           },
           {
-            'account': '0.0.1003',
+            'account': '0.0.1002',
             'privateKey': '0x6ec1f2e7d126a74a1d2ff9e1c5d90b92378c725e506651ff8bb8616a5c724628'
           },
         ]
@@ -75,6 +85,8 @@ module.exports = {
   }
 };
 ```
+
+The following networks have their respective settings pre-defined. You will only need to specify the accounts: `testnet`, `mainnet`, `previewnet`, `local`. For any other networks the full configuration needs to be provided, as in the `customNetwork` example above.
 
 Read more about Externally Owned Accounts [here](https://docs.hedera.com/hethers/application-programming-interface/signers#externallyownedaccount).
 
