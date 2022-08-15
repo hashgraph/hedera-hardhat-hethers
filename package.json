@@ -22,7 +22,8 @@
     "prettier": "node_modules/.bin/prettier \\\"**/*.{js,md,json}\\\"",
     "test": "node_modules/.bin/mocha --recursive \\\"test/**/*.ts\\\" --exit",
     "build": "npm run clean && node_modules/.bin/tsc --build .",
-    "clean": "node_modules/.bin/rimraf dist internal types *.{d.ts,js}{,.map} build-test tsconfig.tsbuildinfo"
+    "clean": "node_modules/.bin/rimraf dist internal types *.{d.ts,js}{,.map} build-test tsconfig.tsbuildinfo",
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "dist/",
