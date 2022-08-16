@@ -20,7 +20,7 @@
 
 import 'mocha';
 import {assert} from 'chai';
-import {HethersProviderWrapper} from '../src/internal/hethers-provider-wrapper';
+import {HethersProviderWrapper} from '../src/hethers-provider-wrapper';
 import {hethers} from '@hashgraph/hethers';
 import {useEnvironment} from './helpers';
 import path from 'path';

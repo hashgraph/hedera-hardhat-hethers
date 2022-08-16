@@ -21,7 +21,17 @@ And add the following statement to your `hardhat.config.js`:
 require("@hashgraph/hardhat-hethers");
 ```
 
-Add network configuration in `hardhat.config.js`:
+Or if you're using `Typescript`:
+
+```typescript
+import "@hashgraph/hardhat-hethers";
+```
+
+## Configuration
+
+This plugin extends the `HardhatConfig` object with `hedera` and updates the type of the `networks` field.
+
+Here is an example network configuration in `hardhat.config.js`:
 
 ```js
 module.exports = {
@@ -76,6 +86,8 @@ module.exports = {
 };
 ```
 
+The following networks have their respective settings pre-defined. You will only need to specify the accounts when using `testnet`, `mainnet`, `previewnet` or `local`. For any other networks the full configuration needs to be provided, as in the `customNetwork` example above.
+
 Read more about Externally Owned Accounts [here](https://docs.hedera.com/hethers/application-programming-interface/signers#externallyownedaccount).
 
 
@@ -107,6 +119,36 @@ interface FactoryOptions {
   signer?: hethers.Signer;
   libraries?: Libraries;
 }
+
+interface HederaAccount {
+    account?: string;
+    address?: string;
+    alias?: string;
+    privateKey: string;
+}
+
+interface HederaNodeConfig {
+    url: string;
+    nodeId: string;
+}
+
+interface HederaNetwork {
+    accounts: Array<HederaAccount>;
+    nodeId?: string;
+    consensusNodes?: Array<HederaNodeConfig>;
+    mirrorNodeUrl?: string;
+    chainId?: number;
+}
+
+interface HederaNetworks {
+    [name: string]: HederaNetwork
+}
+
+interface HederaConfig {
+    gasLimit: number;
+    networks: HederaNetworks;
+}
+
 ```
 
 #### Functions

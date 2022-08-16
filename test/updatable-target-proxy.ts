@@ -20,7 +20,7 @@
 
 import 'mocha';
 import {assert} from 'chai';
-import {createUpdatableTargetProxy} from '../src/internal/updatable-target-proxy';
+import {createUpdatableTargetProxy} from '../src/updatable-target-proxy';
 
 describe('Updatable target proxy', function () {
     it('should proxy properties', function () {
