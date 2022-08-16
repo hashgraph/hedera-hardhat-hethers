@@ -31,16 +31,6 @@ export interface FactoryOptions {
     libraries?: Libraries;
 }
 
-export declare function getContractFactory(
-    name: string,
-    signerOrOptions?: hethers.Signer | FactoryOptions
-): Promise<hethers.ContractFactory>;
-export declare function getContractFactory(
-    abi: any[],
-    bytecode: hethers.utils.BytesLike,
-    signer?: hethers.Signer
-): Promise<hethers.ContractFactory>;
-
 export interface HederaAccount {
     account?: string;
     address?: string;
@@ -69,6 +59,16 @@ export interface HederaConfig {
     gasLimit: number;
     networks: HederaNetworks;
 }
+
+export declare function getContractFactory(
+    name: string,
+    signerOrOptions?: hethers.Signer | FactoryOptions
+): Promise<hethers.ContractFactory>;
+export declare function getContractFactory(
+    abi: any[],
+    bytecode: hethers.utils.BytesLike,
+    signer?: hethers.Signer
+): Promise<hethers.ContractFactory>;
 
 type HethersT = typeof hethers;
 
