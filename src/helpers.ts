@@ -317,7 +317,7 @@ function defaultNthArgument(fn, n, thisObj, defaultObj) {
         let receivedArgs = args.length;
 
         // Check if the last argument is an options object
-        if (typeof args[receivedArgs - 1] === 'object') {
+        if (typeof args[receivedArgs - 1] === 'object' && args[receivedArgs - 1].constructor.name === 'Object') {
             // don't count it
             receivedArgs--;
         }
