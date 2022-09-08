@@ -11,6 +11,9 @@ contract TestContractLib {
     function printNumber(uint256 amount) public returns (uint256) {
         uint result = TestLibrary.libDo(amount);
         return result;
+
+        ds
+        
     }
     ewe
 }
