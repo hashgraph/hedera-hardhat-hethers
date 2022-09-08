@@ -12,4 +12,5 @@ contract TestContractLib {
         uint result = TestLibrary.libDo(amount);
         return result;
     }
+    ewe
 }
