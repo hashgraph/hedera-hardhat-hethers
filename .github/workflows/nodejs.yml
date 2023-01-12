@@ -45,7 +45,7 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
 
       - name: Start the local node
-        run: npx hedera-local start
+        run: npx hedera start -d --network local
 
       - name: Run tests
         run: npm run test
