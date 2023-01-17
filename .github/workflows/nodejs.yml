@@ -45,10 +45,10 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
 
       - name: Start the local node
-        run: npx hedera-local start
+        run: npx hedera restart --limits=false --dev=true -d
 
       - name: Run tests
         run: npm run test
 
       - name: Stop the local node
-        run: npx hedera-local stop
+        run: npx hedera stop
